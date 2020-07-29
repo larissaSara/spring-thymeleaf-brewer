@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/LayoutPadrao"
+	xmlns:brewer="http://brewer.org.br">
+	
+<head>
+	<title>Pesquisa de clientes</title>	
+</head>
+<body>
+<section layout:fragment="conteudo">
+<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-10">
+					<h1>Pesquisa de clientes</h1>
+				</div>
+				<div class="col-sm-2">
+					<div class="aw-page-header-controls">
+						<a class="btn btn-default" th:href="@{/clientes/novo}">
+							<i class="glyphicon glyphicon-plus-sign"></i> <span class="hidden-xs hidden-sm"> Novo Cliente</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<div class="container-fluid">
+	<form method="GET" th:object="${clienteFilter}">
+			<div class="row">
+							
+				<div class="form-group  col-sm-8" >
+					<label class="control-label" for="nome">Nome</label>
+					<input type="text" class="form-control" id="nome"  th:field="*{nome}"/>
+				</div>
+					<div class="form-group  col-sm-4">
+					<label class="control-label" for="cpfOuCnpj">CPF/CNPJ</label>
+					<input type="text" class="form-control" id="cpfOuCnpj"  th:field="*{cpfOuCnpj}"/>
+				</div>
+			</div>
+			
+			
+			<button type="submit" class="btn  btn-primary">Pesquisar</button>
+		</form>
+		
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table  table-hover">
+				<thead>
+					<tr>
+						<th class="table-clientes-col-nome">
+							<brewer:order page="${pagina}" field="nome" text="Nome"/>
+						</th>
+						<th class="table-clientes-col-tipoPessoa">
+							<brewer:order page="${pagina}" field="tipoPessoa" text="Tipo Pessoa"/>
+						</th>
+						<th class="table-clientes-col-cpfOuCnpj">CPF/CNPJ</th>
+						<th class="table-clientes-col-telefone">Telefone</th>
+						<th class="table-clientes-col-cidade-estado">Cidade/Estado</th>
+						<th class="table-cervejas-col-acoes"></th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="cliente : ${pagina.conteudo}">
+						
+						<td th:text="${cliente.nome}">João</td>
+						<td  th:text="${cliente.tipoPessoa}">Física</td>
+						<td  th:text="${cliente.cpfOuCnpj}">CPF</td>
+						<td  th:text="${cliente.telefone}">TELEFONE</td>
+						<td  th:text="${cliente.endereco.nomeCidadeSiglaEstado}">TELEFONE</td>
+						
+						<td class="text-center">
+							<a class="btn  btn-link  btn-xs" title="Editar"> 
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a>
+							<a class="btn  btn-link  btn-xs" title="Excluir">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</td>
+					</tr>
+					<tr th:if="${pagina.vazia}">
+						<td colspan="7">Nenhum cliente encontrado!</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<brewer:paginacao page="${pagina}"/>
+</div>
+</section>
+</body>
+</html>

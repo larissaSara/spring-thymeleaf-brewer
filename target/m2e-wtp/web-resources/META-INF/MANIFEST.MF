@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: brewer
+Implementation-Version: 1.0.0-SNAPSHOT
+Built-By: larissa
+Implementation-Vendor-Id: com.algaworks
+Build-Jdk: 1.8.0_201
+Implementation-URL: http://projects.spring.io/spring-boot/brewer/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
